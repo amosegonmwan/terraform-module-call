@@ -23,6 +23,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
+          region: "us-west-2"
           role-to-assume: ${{ secrets.CI_ROLE }}
             
       - name: Run Teraform init
