@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push
+
+jobs:
+   terraform:
+     runs-on: ubuntu-latest
+     steps:
+      - name: Clone code
+        uses: actions/checkout@v3
+        
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+         terraform_version: 1.9.3
+         
+      - name: Setup SSH-agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            
+      - name: Run Teraform init
+        run: terraform init
+        
+      - name: Run Teraform validate
+        run: terraform validate
+        
+      - name: Run Teraform plan
+        run: terraform plan
