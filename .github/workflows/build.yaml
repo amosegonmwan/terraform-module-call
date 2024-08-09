@@ -1,28 +1,28 @@
-name: build
+name: Build
 
 on:
   push
 
 jobs:
-   terraform:
-     permissions:
-       id-token: write
-       contents: read
-       
-     runs-on: ubuntu-latest
-     steps:
+  terraform:
+    permissions:
+      id-token: write
+      contents: read
+      
+    runs-on: ubuntu-latest
+    steps:
       - name: Clone code
         uses: actions/checkout@v3
         
-      - name: Install terraform
+      - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-         terraform_version: 1.9.3
-         
+          terraform_version: 1.9.3
+          
       - name: Setup SSH-agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -30,11 +30,11 @@ jobs:
           aws-region: "us-west-2"
           role-to-assume: ${{ secrets.CI_ROLE }}
             
-      - name: Run Teraform init
+      - name: Run Terraform init
         run: terraform init
         
-      - name: Run Teraform validate
+      - name: Run Terraform validate
         run: terraform validate
         
-      - name: Run Teraform plan
-        run: terraform plan
+      - name: Run Terraform plan
+        run: terraform
