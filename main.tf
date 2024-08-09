@@ -1,0 +1,3 @@
+module "s3" {
+  source = "git@github.com:amosegonmwan/github-actions-102.git//s3-module?ref=v2.1.0"
+}
