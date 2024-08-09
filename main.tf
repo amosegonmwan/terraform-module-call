@@ -5,4 +5,5 @@ module "s3" {
   my_bucket = "devops"
   team = "cloud"
   status = "Enabled"
+  region = "us-west-2"
 }
